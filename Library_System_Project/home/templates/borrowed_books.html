@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Student Dashaboard</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Renew</th>
+        <th>Return</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in transactions %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ transaction.book.title }}</td>
+          <td>{{ transaction.due_date }}</td>
+          <td>
+            {% if request.user.is_authenticated %}
+              {% if transaction.renewal_count < 1 and transaction.is_due %}
+                <a href="{% url 'renew_book' transaction.id %}" class="btn btn-primary">Renew</a>
+              {% endif %}
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'return_book' transaction.id %}" class="btn btn-danger">Return</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

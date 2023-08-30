@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Librarian Dashboard</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Student</th>
+        <th>Book</th>
+        <th>Date Borrowed</th>
+        <th>Due Date</th>
+        <th>Renew History</th>
+        <th>Mark Borrowed</th>
+        <th>Mark Returned</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in transactions %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ transaction.student.user.username }}</td>
+          <td>{{ transaction.book.title }}</td>
+          <td>{{ transaction.date_borrowed }}</td>
+          <td>{{ transaction.due_date }}</td>
+          <td>{{transaction.renewal_count }}</td>
+          <td>
+            <a href="{% url 'mark_borrowed' transaction.id %}" class="btn btn-success">Mark Borrowed</a>
+          </td>
+          <td>
+            <a href="{% url 'mark_returned' transaction.id %}" class="btn btn-warning">Mark Returned</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

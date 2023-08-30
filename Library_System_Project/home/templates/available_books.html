@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Available Books</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Copies Available</th>
+        <th>Borrow</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.copies_available }}</td>
+          <td>
+            {% if request.user.is_authenticated and request.user.student %}
+              {% if book.copies_available > 1 and request.user.student.borrowed_books.count < 10 %}
+                <a href="{% url 'borrow_book' book.id %}" class="btn btn-primary">Borrow</a>
+              {% endif %}
+              {% else %}
+              <a href="{% url 'borrow_book' book.id %}" class="btn btn-primary">Borrow</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
