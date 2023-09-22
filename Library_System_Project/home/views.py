@@ -136,6 +136,8 @@ def mark_returned(request, transaction_id):
     
     Finally, the function redirects the librarian to the 'librarian_dashboard' page, where they can manage transactions.
     """
+
+    
     if request.user.librarian:
         transaction = Transaction.objects.get(pk=transaction_id)
         book = transaction.book
