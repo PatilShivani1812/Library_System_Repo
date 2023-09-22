@@ -24,3 +24,9 @@ class Transaction(models.Model):
 
 class Librarian(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+
+
+
+##This is model.py file
