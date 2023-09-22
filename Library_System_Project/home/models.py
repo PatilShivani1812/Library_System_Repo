@@ -11,7 +11,7 @@ class Book(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     borrowed_books = models.ManyToManyField(Book, through='Transaction')
-
+    
 class Transaction(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -25,8 +25,3 @@ class Transaction(models.Model):
 class Librarian(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-
-
-
-
-##This is model.py file
