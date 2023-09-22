@@ -148,5 +148,4 @@ def mark_returned(request, transaction_id):
         transaction.delete()
     return redirect('librarian_dashboard')
 
-
-#Hello views
+# updated
